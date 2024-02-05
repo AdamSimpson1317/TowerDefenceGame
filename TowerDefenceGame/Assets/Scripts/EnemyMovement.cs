@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
     //Move from 1 point to another
     //Once at the end trigger the health script and Destroy object
 
+    public EnemyWave enemyWave;
     public GameObject[] corners;
     public float speed = 1f;
     public GameObject target;
@@ -14,6 +15,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
+        enemyWave = GameObject.FindGameObjectWithTag("GameManager").GetComponent<EnemyWave>();
+        corners = enemyWave.pathPoints;
         target = corners[0];
     }
 
