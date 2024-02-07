@@ -8,7 +8,6 @@ public class EndTrigger : MonoBehaviour
 {
     public WorldHealth worldHealth;
 
-    // Start is called before the first frame update
     void Start()
     {
         worldHealth = GameObject.FindGameObjectWithTag("GameManager").GetComponent<WorldHealth>();
@@ -16,7 +15,6 @@ public class EndTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.transform.tag);
         if(collision.transform.CompareTag("Enemy"))
         {
             worldHealth.UpdateHealth();
