@@ -1229,6 +1229,7 @@ MonoBehaviour:
   - {fileID: 2484061560192115052, guid: a7533546b07bd2c42b13120971c4229e, type: 3}
   - {fileID: 3949571957264596627, guid: 4233b5b19dfb9fc4e9d5d9ef17e46f7b, type: 3}
   - {fileID: 5611818289593567916, guid: aa9bee39631d5154b8cd8f0c5f4528c1, type: 3}
+  enemyPrefabsIndex: 
   pathPoints:
   - {fileID: 1839984003}
   - {fileID: 1747793724}
@@ -1242,11 +1243,22 @@ MonoBehaviour:
   - {fileID: 980803672}
   - {fileID: 1886443591}
   - {fileID: 1005991308}
-  enemyCounts: 0f0000000a00000005000000
+  enemyCounts: 
   spawnDelay: 1
   spawning: 0
   totalEnemies: 0
   spawnToggle: 0
+  waves:
+  - basicEnemy: 5
+    mediumEnemy: 2
+    hardEnemy: 1
+  - basicEnemy: 10
+    mediumEnemy: 5
+    hardEnemy: 3
+  - basicEnemy: 20
+    mediumEnemy: 10
+    hardEnemy: 5
+  waveCount: 0
 --- !u!114 &1818963897
 MonoBehaviour:
   m_ObjectHideFlags: 0
