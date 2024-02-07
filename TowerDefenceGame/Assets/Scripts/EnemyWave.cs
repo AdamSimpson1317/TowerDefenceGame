@@ -6,7 +6,8 @@ public class EnemyWave : MonoBehaviour
 {
     
     public Transform initialSpawn;
-    public List<GameObject> enemyPrefabs;
+    public GameObject[] enemyPrefabs;
+    public List<int> enemyPrefabsIndex;
     public GameObject[] pathPoints;
 
     //This list acts as a counter for how many of each enemy type to spawn
@@ -19,25 +20,69 @@ public class EnemyWave : MonoBehaviour
     [SerializeField]
     private bool spawnToggle;
 
+    public Wave[] waves;
+    public int waveCount = 0;
+
 
     private void Start()
     {
-        for (int i = 0; i < enemyCounts.Count; i++)
-        {
-            totalEnemies += enemyCounts[i];
-        }
+        StartWave();
     }
 
     private void Update()
     {
         
-        if (!spawnToggle && totalEnemies > 0)
+        if (!spawnToggle && totalEnemies > 0 && spawning)
         {
             totalEnemies--;
+            if (totalEnemies <= 0)
+            {
+                waveCount++;
+                spawning = false;
+                //Next wave
+                if (waveCount <= waves.Length)
+                {
+                    StartCoroutine(SpawnNextWave());
+                }
+            }
             StartCoroutine(SpawnDelay());
-        }   
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartWave();
+        }
     }
-    
+   
+    public void StartWave()
+    {
+        
+        PrepWave();
+        CountTotalEnemies();
+        spawning = true;
+    }
+
+    public void PrepWave()
+    {
+        totalEnemies = 0;
+
+        for (int i = 0; i < enemyPrefabs.Length; i++)
+        {
+            enemyPrefabsIndex.Add(i);
+        }
+        
+
+        enemyCounts.Add(waves[waveCount].basicEnemy);
+        enemyCounts.Add(waves[waveCount].mediumEnemy);
+        enemyCounts.Add(waves[waveCount].hardEnemy);
+    }
+
+    public void CountTotalEnemies()
+    {
+        totalEnemies = waves[waveCount].basicEnemy + waves[waveCount].mediumEnemy + waves[waveCount].hardEnemy;
+        
+    }
+        
 
     public IEnumerator SpawnDelay()
     {
@@ -52,9 +97,10 @@ public class EnemyWave : MonoBehaviour
     {
         
         int randIndex = Random.Range(0, (enemyCounts.Count));
-        GameObject enemy = Instantiate(enemyPrefabs[randIndex], initialSpawn.position, initialSpawn.rotation);
+        GameObject enemy = Instantiate(enemyPrefabs[enemyPrefabsIndex[randIndex]], initialSpawn.position, initialSpawn.rotation);
         enemyCounts[randIndex]--;
         EnemyCountCheck(randIndex);
+        
 
 
 
@@ -65,14 +111,29 @@ public class EnemyWave : MonoBehaviour
         if(enemyCounts[index] <= 0)
         {
             enemyCounts.RemoveAt(index);
-            enemyPrefabs.RemoveAt(index);
+            enemyPrefabsIndex.RemoveAt(index);
             
         }
-       
+
+    }
+
+    public IEnumerator SpawnNextWave()
+    {
+        yield return new WaitForSeconds(30f);
+        StartWave();
     }
 
 
 
 }
+
+[System.Serializable]
+public class Wave 
+{
+    public int basicEnemy;
+    public int mediumEnemy;
+    public int hardEnemy;
+}
+
 
 
