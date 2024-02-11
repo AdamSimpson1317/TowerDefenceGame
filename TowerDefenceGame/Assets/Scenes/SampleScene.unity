@@ -123,6 +123,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &51605548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51605550}
+  - component: {fileID: 51605549}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &51605549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51605548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a28e370946a834c9be1acd4b882a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 1926390909}
+  location: {x: 0, y: 0, z: 0}
+  towerPrefabs:
+  - {fileID: 7498853922911479069, guid: c5ee7b32209324b40a6081a5bcc82502, type: 3}
+  placing: 0
+--- !u!4 &51605550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51605548}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.525356, y: 0.881575, z: -0.22342719}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &169688372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,9 +1298,9 @@ MonoBehaviour:
   totalEnemies: 0
   spawnToggle: 0
   waves:
-  - basicEnemy: 5
-    mediumEnemy: 2
-    hardEnemy: 1
+  - basicEnemy: 100
+    mediumEnemy: 100
+    hardEnemy: 100
   - basicEnemy: 10
     mediumEnemy: 5
     hardEnemy: 3
@@ -9855,6 +9904,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 51605550}
   - {fileID: 1818963895}
   - {fileID: 519420032}
   - {fileID: 1521472462}
