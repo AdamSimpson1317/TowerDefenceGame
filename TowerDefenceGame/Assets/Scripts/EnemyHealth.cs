@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    
+    WorldMoney worldMoney;
     public int maxHealth;
     public int health;
 
@@ -17,6 +17,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
         health = maxHealth;
+        worldMoney = GameObject.FindGameObjectWithTag("GameManager").GetComponent<WorldMoney>();
     }
 
     public void TakeDamage(int damage)
@@ -24,7 +25,10 @@ public class EnemyHealth : MonoBehaviour
         health -= damage;
         ChangeColour();
         if(health == 0)
+        {
+            worldMoney.UpdateMoney(10);
             Destroy(gameObject);
+        }
 
     }
 
