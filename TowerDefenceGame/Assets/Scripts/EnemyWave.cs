@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyWave : MonoBehaviour
 {
-    
+    public WorldMoney worldMoney;
     public Transform initialSpawn;
     public GameObject[] enemyPrefabs;
     public List<int> enemyPrefabsIndex;
@@ -120,6 +120,7 @@ public class EnemyWave : MonoBehaviour
     public IEnumerator SpawnNextWave()
     {
         yield return new WaitForSeconds(30f);
+        worldMoney.UpdateMoney(100);
         StartWave();
     }
 
