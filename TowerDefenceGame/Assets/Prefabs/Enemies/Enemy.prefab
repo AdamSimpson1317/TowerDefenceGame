@@ -165,3 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1
   health: 0
+  spriteRenderer: {fileID: 5984680095141133978}
+  redColour: {r: 1, g: 0, b: 0, a: 1}
+  yellowColour: {r: 1, g: 0.8627451, b: 0, a: 1}
+  blackColour: {r: 0, g: 0, b: 0, a: 1}
+  movement: {fileID: 2636399005326156915}
