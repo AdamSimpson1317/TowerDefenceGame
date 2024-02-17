@@ -37,18 +37,19 @@ public class TowerPlacement : MonoBehaviour
         if (tilemap.GetTile(location))
         {
             Debug.Log(location.ToString() + " : " + mp.ToString());
-            Debug.Log("Tile toiled");
+            Instantiate(towerPrefabs[0], pos, Quaternion.identity);
         }
         else
         {
-            Debug.Log("Not toiled");
+            Debug.Log("not placed");
+
         }
 
                 
 
 
 
-        Instantiate(towerPrefabs[0], pos, Quaternion.identity);
+        
 
         yield return new WaitForSeconds(.5f);
 
