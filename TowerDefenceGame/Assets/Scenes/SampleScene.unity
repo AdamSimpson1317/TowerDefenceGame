@@ -5980,6 +5980,7 @@ GameObject:
   - component: {fileID: 1818963896}
   - component: {fileID: 1818963897}
   - component: {fileID: 1818963898}
+  - component: {fileID: 1818963899}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -6015,6 +6016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldMoney: {fileID: 1818963898}
+  worldEnemies: {fileID: 1818963899}
   initialSpawn: {fileID: 1839984004}
   enemyPrefabs:
   - {fileID: 2484061560192115052, guid: a7533546b07bd2c42b13120971c4229e, type: 3}
@@ -6040,9 +6042,9 @@ MonoBehaviour:
   totalEnemies: 0
   spawnToggle: 0
   waves:
-  - basicEnemy: 10
-    mediumEnemy: 10
-    hardEnemy: 10
+  - basicEnemy: 3
+    mediumEnemy: 2
+    hardEnemy: 1
   - basicEnemy: 10
     mediumEnemy: 5
     hardEnemy: 3
@@ -6078,6 +6080,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 200
   moneyText: {fileID: 1750096427}
+--- !u!114 &1818963899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818963894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 509d6741fda9d3442800031154b21dd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemiesOnMap: 0
 --- !u!1 &1836813460
 GameObject:
   m_ObjectHideFlags: 0

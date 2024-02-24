@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyWave : MonoBehaviour
 {
     public WorldMoney worldMoney;
+    public WorldEnemies worldEnemies;
     public Transform initialSpawn;
     public GameObject[] enemyPrefabs;
     public List<int> enemyPrefabsIndex;
@@ -31,19 +32,22 @@ public class EnemyWave : MonoBehaviour
 
     private void Update()
     {
+        if(worldEnemies.enemiesOnMap <= 0)
+        {
+            waveCount++;
+            //Next wave
+            if (waveCount < waves.Length)
+            {
+                StartCoroutine(SpawnNextWave());
+            }
+        }
         
         if (!spawnToggle && totalEnemies > 0 && spawning)
         {
             totalEnemies--;
             if (totalEnemies <= 0)
             {
-                waveCount++;
-                spawning = false;
-                //Next wave
-                if (waveCount <= waves.Length)
-                {
-                    StartCoroutine(SpawnNextWave());
-                }
+                spawning = false;                
             }
             StartCoroutine(SpawnDelay());
         }
@@ -80,7 +84,7 @@ public class EnemyWave : MonoBehaviour
     public void CountTotalEnemies()
     {
         totalEnemies = waves[waveCount].basicEnemy + waves[waveCount].mediumEnemy + waves[waveCount].hardEnemy;
-        
+        worldEnemies.enemiesOnMap = totalEnemies;
     }
         
 
@@ -119,8 +123,9 @@ public class EnemyWave : MonoBehaviour
 
     public IEnumerator SpawnNextWave()
     {
-        yield return new WaitForSeconds(30f);
         worldMoney.UpdateMoney(100);
+        yield return new WaitForSeconds(10f);
+       
         StartWave();
     }
 
