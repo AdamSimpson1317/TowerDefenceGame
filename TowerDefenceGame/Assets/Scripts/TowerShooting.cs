@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerShooting : MonoBehaviour
 {
 
+    public TowerType towerType;
     private Transform target;
     public float range = 2f;
     public float fireRate = 1f;
@@ -63,6 +64,7 @@ public class TowerShooting : MonoBehaviour
 
         if(projectile != null)
             projectile.Seek(target);
+            projectile.towerType = towerType.ToString(); 
     }
 
     void OnDrawGizmosSelected()
