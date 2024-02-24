@@ -4,8 +4,16 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 //using UnityEngine.InputSystem;
 
+public enum TowerType{
+    None,
+    Archer,
+    Infantry,
+    Wizard
+}
+
 public class TowerPlacement : MonoBehaviour
 {
+    
     public Tilemap tilemap;
     public Vector3Int location;
     public GameObject[] towerPrefabs;
@@ -116,9 +124,4 @@ public class TowerPlacement : MonoBehaviour
     
 }
 
-public enum TowerType{
-    None,
-    Archer,
-    Infantry,
-    Wizard
-}
+
