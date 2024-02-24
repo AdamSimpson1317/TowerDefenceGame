@@ -127,7 +127,7 @@ public class EnemyWave : MonoBehaviour
         waveCooldown = true;
         worldEnemies.ToggleTimer(true);
         int timer = worldEnemies.waveTimer;
-        if (waveCount > 1)
+        if (waveCount > 0)
         {
             worldMoney.UpdateMoney(100);
         }
