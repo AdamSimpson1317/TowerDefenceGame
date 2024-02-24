@@ -20,6 +20,7 @@ public class TowerPlacement : MonoBehaviour
     public TowerType selectedTower;
     public int selectedTowerCost;
     public WorldMoney worldMoney;
+    public Dictionary<Vector3, GameObject> existingTowers = new Dictionary<Vector3, GameObject>();
 
     public bool placing = false;
 
@@ -90,25 +91,36 @@ public class TowerPlacement : MonoBehaviour
         {
             if (worldMoney.money >= selectedTowerCost)
             {
-                if (tower == TowerType.Archer)
+                if (existingTowers.ContainsKey(pos))
                 {
-                    Debug.Log("placing");
-                    Instantiate(towerPrefabs[0], pos, Quaternion.identity);
-                    worldMoney.UpdateMoney(-selectedTowerCost);
-                }
-                else if (tower == TowerType.Infantry)
-                {
-                    Instantiate(towerPrefabs[1], pos, Quaternion.identity);
-                    worldMoney.UpdateMoney(-selectedTowerCost);
-                }
-                else if (tower == TowerType.Wizard)
-                {
-                    Instantiate(towerPrefabs[2], pos, Quaternion.identity);
-                    worldMoney.UpdateMoney(-selectedTowerCost);
+                    Debug.Log("Tower already in this place!");
                 }
                 else
                 {
-                    Debug.Log("No tower selected");
+                    if (tower == TowerType.Archer)
+                    {
+                        Debug.Log("placing");
+                        GameObject newObj = Instantiate(towerPrefabs[0], pos, Quaternion.identity);
+                        worldMoney.UpdateMoney(-selectedTowerCost);
+                        existingTowers.Add(pos, newObj);
+                    }
+                    else if (tower == TowerType.Infantry)
+                    {
+                        GameObject newObj = Instantiate(towerPrefabs[1], pos, Quaternion.identity);
+                        worldMoney.UpdateMoney(-selectedTowerCost);
+                        existingTowers.Add(pos, newObj);
+                    }
+                    else if (tower == TowerType.Wizard)
+                    {
+                        GameObject newObj = Instantiate(towerPrefabs[2], pos, Quaternion.identity);
+                        worldMoney.UpdateMoney(-selectedTowerCost);
+                        existingTowers.Add(pos, newObj);
+                    }
+                    else
+                    {
+                        Debug.Log("No tower selected");
+
+                    }
 
                 }
             }
@@ -119,6 +131,18 @@ public class TowerPlacement : MonoBehaviour
             placing = false;
         }
 
+    }
+
+    public void CheckForTile()
+    {
+        if (tilemap.GetTile(location))
+        {
+            Debug.Log("");
+        }
+        else
+        {
+            Debug.Log("Not toiled");
+        }
     }
 
     
