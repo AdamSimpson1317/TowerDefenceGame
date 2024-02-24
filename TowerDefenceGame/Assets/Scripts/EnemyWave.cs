@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyWave : MonoBehaviour
 {
     public WorldMoney worldMoney;
+    public WorldEnemies worldEnemies;
     public Transform initialSpawn;
     public GameObject[] enemyPrefabs;
     public List<int> enemyPrefabsIndex;
@@ -19,31 +20,35 @@ public class EnemyWave : MonoBehaviour
     
     [SerializeField]
     private bool spawnToggle;
-
+    private bool waveCooldown;
     public Wave[] waves;
     public int waveCount = 0;
 
 
     private void Start()
     {
-        StartWave();
+        //StartWave();
+        StartCoroutine(SpawnNextWave());
     }
 
     private void Update()
     {
+        if(worldEnemies.enemiesOnMap <= 0 && !waveCooldown)
+        {
+            waveCount++;
+            //Next wave
+            if (waveCount < waves.Length)
+            {
+                StartCoroutine(SpawnNextWave());
+            }
+        }
         
         if (!spawnToggle && totalEnemies > 0 && spawning)
         {
             totalEnemies--;
             if (totalEnemies <= 0)
             {
-                waveCount++;
-                spawning = false;
-                //Next wave
-                if (waveCount <= waves.Length)
-                {
-                    StartCoroutine(SpawnNextWave());
-                }
+                spawning = false;                
             }
             StartCoroutine(SpawnDelay());
         }
@@ -80,7 +85,7 @@ public class EnemyWave : MonoBehaviour
     public void CountTotalEnemies()
     {
         totalEnemies = waves[waveCount].basicEnemy + waves[waveCount].mediumEnemy + waves[waveCount].hardEnemy;
-        
+        worldEnemies.enemiesOnMap = totalEnemies;
     }
         
 
@@ -119,8 +124,23 @@ public class EnemyWave : MonoBehaviour
 
     public IEnumerator SpawnNextWave()
     {
-        yield return new WaitForSeconds(30f);
-        worldMoney.UpdateMoney(100);
+        waveCooldown = true;
+        worldEnemies.ToggleTimer(true);
+        int timer = worldEnemies.waveTimer;
+        if (waveCount > 1)
+        {
+            worldMoney.UpdateMoney(100);
+        }
+        for (int i = 0; i < timer; i++)
+        {
+            //Updates timer before wave starts
+            worldEnemies.UpdateTimer(timer - i);
+            yield return new WaitForSeconds(1f);
+        }
+        //Resets timer UI and hides it when wave starts
+        worldEnemies.ResetTimer();
+        worldEnemies.ToggleTimer(false);
+        waveCooldown = false;
         StartWave();
     }
 
