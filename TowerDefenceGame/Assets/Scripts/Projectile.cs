@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -5,11 +6,15 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public string type;
+    public string towerType;
     private Transform target;
     public float speed = 70f;
+    //DestroyTimer Could be an Upgrade.
+    public float destroyTimer = 5f;
     public int damage = 1;
-    private bool wiz;
+    private bool wiz = false;
+    public Rigidbody2D rb;
+    Vector2 dir = Vector2.up;
 
     public void Seek(Transform _target)
     {
@@ -19,11 +24,12 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(type == "Archer")
+        //Switch this to Archer and not Infantry when switch to Archer is made everywhere
+        if(towerType == "Infantry")
         {
             ArrowTower();
         }
-        else if(type == "Wizard")
+        else if(towerType == "Wizard")
         {
             WizardTower();
         }
@@ -31,16 +37,20 @@ public class Projectile : MonoBehaviour
 
     void WizardTower()
     {
-        Vector3 dir = target.position - transform.position;
-        float distanceThisFrame = speed * Time.deltaTime;
-
-        if(dir.magnitude <= distanceThisFrame)
+        Destroy(gameObject, destroyTimer);
+        if(!wiz)
         {
-            wiz = true;
-            return;
-        }
+            dir = target.position - transform.position;
+            float distanceThisFrame = speed * Time.deltaTime;
 
-        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+            if(dir.magnitude <= distanceThisFrame)
+            {
+                HitTargets(dir);
+                return;
+            }
+
+            transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+        }
     }
 
     void ArrowTower()
@@ -68,10 +78,22 @@ public class Projectile : MonoBehaviour
         target.GetComponent<EnemyHealth>().TakeDamage(damage);
         Destroy(gameObject);
     }
+    void HitTargets(Vector2 dir)
+    {
+        target.GetComponent<EnemyHealth>().TakeDamage(damage);
+        wiz = true;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(wiz && collision.transform.CompareTag("Enemy"))
+        if(target != null)
+        {
+            if(collision.gameObject != target.gameObject)
+            {
+                collision.GetComponent<EnemyHealth>().TakeDamage(damage);
+            }
+        }
+        else if(target == null)
         {
             collision.GetComponent<EnemyHealth>().TakeDamage(damage);
         }
