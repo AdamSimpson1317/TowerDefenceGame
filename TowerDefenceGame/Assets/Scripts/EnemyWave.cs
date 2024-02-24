@@ -20,19 +20,20 @@ public class EnemyWave : MonoBehaviour
     
     [SerializeField]
     private bool spawnToggle;
-
+    private bool waveCooldown;
     public Wave[] waves;
     public int waveCount = 0;
 
 
     private void Start()
     {
-        StartWave();
+        //StartWave();
+        StartCoroutine(SpawnNextWave());
     }
 
     private void Update()
     {
-        if(worldEnemies.enemiesOnMap <= 0)
+        if(worldEnemies.enemiesOnMap <= 0 && !waveCooldown)
         {
             waveCount++;
             //Next wave
@@ -123,9 +124,23 @@ public class EnemyWave : MonoBehaviour
 
     public IEnumerator SpawnNextWave()
     {
-        worldMoney.UpdateMoney(100);
-        yield return new WaitForSeconds(10f);
-       
+        waveCooldown = true;
+        worldEnemies.ToggleTimer(true);
+        int timer = worldEnemies.waveTimer;
+        if (waveCount > 1)
+        {
+            worldMoney.UpdateMoney(100);
+        }
+        for (int i = 0; i < timer; i++)
+        {
+            //Updates timer before wave starts
+            worldEnemies.UpdateTimer(timer - i);
+            yield return new WaitForSeconds(1f);
+        }
+        //Resets timer UI and hides it when wave starts
+        worldEnemies.ResetTimer();
+        worldEnemies.ToggleTimer(false);
+        waveCooldown = false;
         StartWave();
     }
 
