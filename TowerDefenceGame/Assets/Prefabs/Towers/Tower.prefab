@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f83eb0631e65f374db1b09ac940af82e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerType: 2
   range: 2
   fireRate: 1
   enemyTag: Enemy
