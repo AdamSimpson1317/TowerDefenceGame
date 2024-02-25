@@ -11,11 +11,17 @@ public class Projectile : MonoBehaviour
     public float speed = 70f;
     //DestroyTimer Could be an Upgrade.
     public float destroyTimer = 5f;
+    public int projectileSizeMultiplier;
     public int damage = 1;
-    private bool wiz = false;
+    private bool infan = false;
+    private bool isWiz = false;
     public Rigidbody2D rb;
     Vector2 dir = Vector2.up;
 
+    private void Start()
+    {
+        projectileSizeMultiplier = 8;
+    }
     public void Seek(Transform _target)
     {
         target = _target;
@@ -24,12 +30,15 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Switch this to Archer and not Infantry when switch to Archer is made everywhere
-        if(towerType == "Infantry")
+        if(towerType == "Archer")
         {
             ArrowTower();
         }
-        else if(towerType == "Wizard")
+        else if(towerType == "Infantry")
+        {
+            InfantryTower();
+        }
+        if(towerType == "Wizard")
         {
             WizardTower();
         }
@@ -37,8 +46,30 @@ public class Projectile : MonoBehaviour
 
     void WizardTower()
     {
+        Destroy(gameObject, 0.5f);
+        if(target == null)
+        {
+            //Destroy(gameObject);
+            return;
+        }
+        
+        Vector3 dir = target.position - transform.position;
+        float distanceThisFrame = speed * Time.deltaTime;
+
+        if(dir.magnitude <= distanceThisFrame && !isWiz)
+        {
+            HitTargetExplosion();
+            transform.localScale  *= projectileSizeMultiplier;
+            return;
+        }
+
+        transform.Translate(dir.normalized * distanceThisFrame, Space.World);
+    }
+
+    void InfantryTower()
+    {
         Destroy(gameObject, destroyTimer);
-        if(!wiz)
+        if(!infan)
         {
             dir = target.position - transform.position;
             float distanceThisFrame = speed * Time.deltaTime;
@@ -81,7 +112,13 @@ public class Projectile : MonoBehaviour
     void HitTargets(Vector2 dir)
     {
         target.GetComponent<EnemyHealth>().TakeDamage(damage);
-        wiz = true;
+        infan = true;
+    }
+
+    void HitTargetExplosion()
+    {
+        target.GetComponent<EnemyHealth>().TakeDamage(damage);
+        isWiz = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

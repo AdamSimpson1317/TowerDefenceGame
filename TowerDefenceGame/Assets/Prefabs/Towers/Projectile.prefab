@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1289603873
-  m_SortingLayer: 2
+  m_SortingLayerID: -918553709
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 36586f9e70906b84b8782f53c32150ca, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -102,6 +102,7 @@ MonoBehaviour:
   towerType: 
   speed: 25
   destroyTimer: 5
+  projectileSizeMultiplier: 8
   damage: 1
   rb: {fileID: -3242096030678093548}
 --- !u!50 &-3242096030678093548
@@ -165,4 +166,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.14
