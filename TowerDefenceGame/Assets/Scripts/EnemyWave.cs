@@ -20,7 +20,7 @@ public class EnemyWave : MonoBehaviour
     
     [SerializeField]
     private bool spawnToggle;
-    private bool waveCooldown;
+    public bool waveCooldown;
     public Wave[] waves;
     public int waveCount = 0;
 
@@ -33,6 +33,7 @@ public class EnemyWave : MonoBehaviour
 
     private void Update()
     {
+        //If all enemies dead and the game not in wave cooldown state
         if(worldEnemies.enemiesOnMap <= 0 && !waveCooldown)
         {
             waveCount++;
@@ -43,6 +44,7 @@ public class EnemyWave : MonoBehaviour
             }
         }
         
+        //If enemies left to spawn and game in spawning state
         if (!spawnToggle && totalEnemies > 0 && spawning)
         {
             totalEnemies--;

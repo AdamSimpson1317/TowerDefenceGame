@@ -8,7 +8,8 @@ public enum TowerType{
     None,
     Archer,
     Infantry,
-    Wizard
+    Wizard,
+    CrystalMine
 }
 
 public class TowerPlacement : MonoBehaviour
@@ -17,11 +18,12 @@ public class TowerPlacement : MonoBehaviour
     public Tilemap tilemap;
     public Vector3Int location;
     public GameObject[] towerPrefabs;
+    public int[] costs;
     public TowerType selectedTower;
     public int selectedTowerCost;
     public WorldMoney worldMoney;
     public Dictionary<Vector3, GameObject> existingTowers = new Dictionary<Vector3, GameObject>();
-
+    public float placingCooldown;
     public bool placing = false;
 
     // Update is called once per frame
@@ -45,6 +47,10 @@ public class TowerPlacement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            SetTowerType(4);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
             SetTowerType(0);
         }
     }
@@ -53,17 +59,22 @@ public class TowerPlacement : MonoBehaviour
         if(index == 1)
         {
             selectedTower = TowerType.Archer;
-            selectedTowerCost = 100;
+            selectedTowerCost = costs[0];
         }
         else if (index == 2)
         {
             selectedTower = TowerType.Infantry;
-            selectedTowerCost = 200;
+            selectedTowerCost = costs[1];
         }
         else if (index == 3)
         {
             selectedTower = TowerType.Wizard;
-            selectedTowerCost = 300;
+            selectedTowerCost = costs[2];
+        }
+        else if (index == 4)
+        {
+            selectedTower = TowerType.CrystalMine;
+            selectedTowerCost = costs[3];
         }
         else
         {
@@ -76,7 +87,7 @@ public class TowerPlacement : MonoBehaviour
 
     IEnumerator TilePlace(TowerType tower)
     {
-        placing = true;
+        
 
         //Get location to place tower (needs fixing)
         Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -97,9 +108,9 @@ public class TowerPlacement : MonoBehaviour
                 }
                 else
                 {
+                    placing = true;
                     if (tower == TowerType.Archer)
                     {
-                        Debug.Log("placing");
                         GameObject newObj = Instantiate(towerPrefabs[0], pos, Quaternion.identity);
                         worldMoney.UpdateMoney(-selectedTowerCost);
                         existingTowers.Add(pos, newObj);
@@ -116,19 +127,26 @@ public class TowerPlacement : MonoBehaviour
                         worldMoney.UpdateMoney(-selectedTowerCost);
                         existingTowers.Add(pos, newObj);
                     }
+                    else if (tower == TowerType.CrystalMine)
+                    {
+                        GameObject newObj = Instantiate(towerPrefabs[3], pos, Quaternion.identity);
+                        worldMoney.UpdateMoney(-selectedTowerCost);
+                        existingTowers.Add(pos, newObj);
+                    }
                     else
                     {
                         Debug.Log("No tower selected");
 
                     }
+                    yield return new WaitForSeconds(placingCooldown);
+
+                    placing = false;
 
                 }
             }
 
 
-            yield return new WaitForSeconds(.5f);
-
-            placing = false;
+            
         }
 
     }
