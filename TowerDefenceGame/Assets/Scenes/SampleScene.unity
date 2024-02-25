@@ -676,7 +676,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerType: 3
   range: 2
-  fireRate: 1
+  fireRate: 0.5
   enemyTag: Enemy
   projectilePrefab: {fileID: 4007528686800251379, guid: 4e5d18e4ae87f5b4a9f882a3fe3a6fbd, type: 3}
   firePoint: {fileID: 1153663166}
@@ -14192,6 +14192,4 @@ SceneRoots:
   - {fileID: 622484724}
   - {fileID: 1222018105}
   - {fileID: 388439869}
-  - {fileID: 673760901}
   - {fileID: 245305829}
-

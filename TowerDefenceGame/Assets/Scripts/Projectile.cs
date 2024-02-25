@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
 
     void WizardTower()
     {
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, 0.5f);
         if(target == null)
         {
             //Destroy(gameObject);
