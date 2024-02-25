@@ -91,12 +91,29 @@ public class TowerPlacement : MonoBehaviour
 
         //Get location to place tower (needs fixing)
         Vector3 mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mp.x = Mathf.Round(mp.x * 2) / 2;
-        mp.y = Mathf.Round(mp.y * 2) / 2;
+        //mp.x = Mathf.Round(mp.x * 2) / 2;
+        //mp.y = Mathf.Round(mp.y * 2) / 2;
         mp.z = 0;
 
         location = tilemap.WorldToCell(mp);
         Vector2 pos = tilemap.CellToWorld(location);
+        //pos.y += 0.57735f;
+        //pos.y += 0.57735f;
+        pos.y += .44f;
+        if (pos.x % 1 == 0)
+        {
+            //pos.y += .15f;
+        }
+        else if (pos.x % 1 == 0.5)
+        {
+            //pos.y -= .25f;
+        }
+
+        //If .5 (-.15) if whole +.15
+
+        
+
+        
 
         if (tilemap.GetTile(location))
         {
@@ -109,6 +126,8 @@ public class TowerPlacement : MonoBehaviour
                 else
                 {
                     placing = true;
+                    Debug.Log("mp: " + mp);
+                    Debug.Log("pos: " + pos);
                     if (tower == TowerType.Archer)
                     {
                         GameObject newObj = Instantiate(towerPrefabs[0], pos, Quaternion.identity);
@@ -136,7 +155,7 @@ public class TowerPlacement : MonoBehaviour
                     else
                     {
                         Debug.Log("No tower selected");
-
+                        
                     }
                     yield return new WaitForSeconds(placingCooldown);
 
