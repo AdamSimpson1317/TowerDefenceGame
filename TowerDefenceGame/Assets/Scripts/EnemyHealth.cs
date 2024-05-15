@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
     {
         health -= damage;
         ChangeColour();
-        if(health == 0)
+        if(health <= 0)
         {
             if(damage != 10)
             {
