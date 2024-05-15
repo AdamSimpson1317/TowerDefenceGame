@@ -28,7 +28,10 @@ public class EnemyHealth : MonoBehaviour
         ChangeColour();
         if(health == 0)
         {
-            worldMoney.UpdateMoney(10);
+            if(damage != 10)
+            {
+                worldMoney.UpdateMoney(10);
+            }
             worldEnemies.enemiesOnMap--;
             Destroy(gameObject);
         }
