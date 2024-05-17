@@ -440,6 +440,7 @@ MonoBehaviour:
   - {fileID: 395723297}
   - {fileID: 1547481019}
   currentHighlight: 4
+  upgradeUI: {fileID: 1818963900}
 --- !u!4 &51605550
 Transform:
   m_ObjectHideFlags: 0
@@ -7150,6 +7151,7 @@ GameObject:
   - component: {fileID: 1818963897}
   - component: {fileID: 1818963898}
   - component: {fileID: 1818963899}
+  - component: {fileID: 1818963900}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -7266,6 +7268,28 @@ MonoBehaviour:
   waveTimer: 10
   timerUI: {fileID: 246525470}
   timerTextUI: {fileID: 882414199}
+--- !u!114 &1818963900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818963894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb06690f69896a458562dac742552b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePanel: {fileID: 1073534173}
+  upgradeNames:
+  - {fileID: 1435025269}
+  - {fileID: 1616727138}
+  upgradeLevels:
+  - {fileID: 303957641}
+  - {fileID: 1220585410}
+  costs:
+  - {fileID: 2081848047}
+  - {fileID: 1598227039}
 --- !u!1 &1836813460
 GameObject:
   m_ObjectHideFlags: 0
