@@ -27,6 +27,7 @@ public class TowerPlacement : MonoBehaviour
     public bool placing = false;
     public GameObject[] highlights;
     public int currentHighlight = 5;
+    public UpgradeUI upgradeUI;
 
     // Update is called once per frame
     void Update()
@@ -134,11 +135,31 @@ public class TowerPlacement : MonoBehaviour
         //If .5 (-.15) if whole +.15
 
         
-
+        if (selectedTower == TowerType.None)
+        {
+            if (tilemap.GetTile(location))
+            {
+                if (existingTowers.ContainsKey(pos))
+                {
+                    Debug.Log("Tower here!");
+                    Debug.Log(existingTowers[pos].name);
+                    //Add getcomponent for upgrade component of tower
+                    //Call update on the ui
+                    upgradeUI.TogglePanel(true);
+                    upgradeUI.UpdateUpgradePanel("lesser dog","greater dog",1,2,420,69);
+                }
+                else
+                {
+                    upgradeUI.TogglePanel(false);
+                }
+                
+            }
+        }
         
 
-        if (tilemap.GetTile(location))
+        else if (tilemap.GetTile(location))
         {
+            
             if (worldMoney.money >= selectedTowerCost)
             {
                 if (existingTowers.ContainsKey(pos))
