@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2381264372584605305}
   - component: {fileID: 3319849531914230345}
   - component: {fileID: 2851151715792812228}
+  - component: {fileID: 9080196207422147665}
   m_Layer: 0
   m_Name: SecondTower
   m_TagString: Untagged
@@ -101,9 +102,35 @@ MonoBehaviour:
   towerType: 3
   range: 2
   fireRate: 0.25
+  destroyTimer: 5
+  projectileSizeMultiplier: 8
   enemyTag: Enemy
   projectilePrefab: {fileID: 4007528686800251379, guid: 4e5d18e4ae87f5b4a9f882a3fe3a6fbd, type: 3}
   firePoint: {fileID: 1861844656040220543}
+--- !u!114 &9080196207422147665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685947044183680361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2e293426d1ff24ebaac8f96e09ed2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  upgradePicture: {fileID: 0}
+  upgradeText1: {fileID: 0}
+  levelText1: {fileID: 0}
+  costText1: {fileID: 0}
+  upgradeText2: {fileID: 0}
+  levelText2: {fileID: 0}
+  costText2: {fileID: 0}
+  towerShooting: {fileID: 0}
+  towerType: 3
+  IsBought1: 0
+  IsBought2: 0
 --- !u!1 &1833145199475416685
 GameObject:
   m_ObjectHideFlags: 0

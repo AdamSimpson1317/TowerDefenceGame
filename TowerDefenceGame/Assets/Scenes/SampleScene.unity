@@ -686,10 +686,10 @@ RectTransform:
   - {fileID: 303957640}
   m_Father: {fileID: 1073534174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 105, y: -46.08635}
-  m_SizeDelta: {x: 150, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &238888539
 MonoBehaviour:
@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 245305829}
   - component: {fileID: 245305828}
   - component: {fileID: 245305827}
+  - component: {fileID: 245305830}
   m_Layer: 0
   m_Name: WizardTower
   m_TagString: Untagged
@@ -841,6 +842,29 @@ Transform:
   - {fileID: 1153663166}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &245305830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245305826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2e293426d1ff24ebaac8f96e09ed2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePicture: {fileID: 517890518}
+  upgradeText1: {fileID: 1435025269}
+  levelText1: {fileID: 303957641}
+  costText1: {fileID: 2081848047}
+  upgradeText2: {fileID: 0}
+  levelText2: {fileID: 0}
+  costText2: {fileID: 0}
+  towerShooting: {fileID: 0}
+  towerType: 0
+  IsBought1: 0
+  IsBought2: 0
 --- !u!1 &246525470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1601,10 +1625,10 @@ RectTransform:
   - {fileID: 1220585409}
   m_Father: {fileID: 1073534174}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 275, y: -46.08635}
-  m_SizeDelta: {x: 150, y: 70}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &415506594
 MonoBehaviour:
@@ -3419,7 +3443,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1073534174
 RectTransform:
   m_ObjectHideFlags: 0

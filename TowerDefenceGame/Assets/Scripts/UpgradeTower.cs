@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeTower : MonoBehaviour
 {
+    public GameObject gameManager;
     public GameObject upgradePicture;
-    public Text upgradeText1;
-    public Text levelText1;
-    public Text costText1;
-    public Text upgradeText2;
-    public Text levelText2;
-    public Text costText2;
+    public UpgradeUI upgradeUI;
+    public TextMeshProUGUI upgradeText1;
+    public TextMeshProUGUI levelText1;
+    public TextMeshProUGUI costText1;
+    public TextMeshProUGUI upgradeText2;
+    public TextMeshProUGUI levelText2;
+    public TextMeshProUGUI costText2;
     public TowerShooting towerShooting;
     public TowerType towerType;
     
@@ -20,6 +22,15 @@ public class UpgradeTower : MonoBehaviour
 
     void Start()
     {
+        gameManager = GameObject.FindWithTag("GameManager");
+        upgradeUI = gameManager.GetComponent<UpgradeUI>();
+        upgradeText1 = upgradeUI.upgradeNames[0];
+        upgradeText2 = upgradeUI.upgradeNames[1];
+        levelText1 = upgradeUI.upgradeLevels[0];
+        levelText2 = upgradeUI.upgradeLevels[1];
+        costText1 = upgradeUI.costs[0];
+        costText2 = upgradeUI.costs[1];
+        //upgradePicture =  
         towerType = towerShooting.towerType;
         IsBought1 = false;
         IsBought2 = false;

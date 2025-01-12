@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7105773463648756343}
   - component: {fileID: 3915969766828290949}
   - component: {fileID: -7330278240666536522}
+  - component: {fileID: -1300487076449871192}
   m_Layer: 0
   m_Name: InfantryTower
   m_TagString: Untagged
@@ -101,9 +102,35 @@ MonoBehaviour:
   towerType: 2
   range: 1
   fireRate: 0.1
+  destroyTimer: 5
+  projectileSizeMultiplier: 8
   enemyTag: Enemy
   projectilePrefab: {fileID: 4007528686800251379, guid: 4e5d18e4ae87f5b4a9f882a3fe3a6fbd, type: 3}
   firePoint: {fileID: 309244464535861912}
+--- !u!114 &-1300487076449871192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2198722083035671739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2e293426d1ff24ebaac8f96e09ed2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  upgradePicture: {fileID: 0}
+  upgradeText1: {fileID: 0}
+  levelText1: {fileID: 0}
+  costText1: {fileID: 0}
+  upgradeText2: {fileID: 0}
+  levelText2: {fileID: 0}
+  costText2: {fileID: 0}
+  towerShooting: {fileID: 0}
+  towerType: 2
+  IsBought1: 0
+  IsBought2: 0
 --- !u!1 &8704490816504192107
 GameObject:
   m_ObjectHideFlags: 0

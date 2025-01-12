@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6968764833359839827}
   - component: {fileID: 166846788861936804}
+  - component: {fileID: 8220319136295317161}
   m_Layer: 0
   m_Name: Crystal Republic
   m_TagString: Untagged
@@ -47,6 +48,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextWaveMoney: 0
   moneyGiven: 100
+--- !u!114 &8220319136295317161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4104102630530571718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db2e293426d1ff24ebaac8f96e09ed2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  upgradePicture: {fileID: 0}
+  upgradeText1: {fileID: 0}
+  levelText1: {fileID: 0}
+  costText1: {fileID: 0}
+  upgradeText2: {fileID: 0}
+  levelText2: {fileID: 0}
+  costText2: {fileID: 0}
+  towerShooting: {fileID: 0}
+  towerType: 4
+  IsBought1: 0
+  IsBought2: 0
 --- !u!1 &7950206134052339352
 GameObject:
   m_ObjectHideFlags: 0
