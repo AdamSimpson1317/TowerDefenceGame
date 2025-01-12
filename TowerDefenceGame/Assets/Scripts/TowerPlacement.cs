@@ -25,6 +25,9 @@ public class TowerPlacement : MonoBehaviour
     public Dictionary<Vector3, GameObject> existingTowers = new Dictionary<Vector3, GameObject>();
     public float placingCooldown;
     public bool placing = false;
+    public GameObject[] highlights;
+    public int currentHighlight = 5;
+    public UpgradeUI upgradeUI;
 
     // Update is called once per frame
     void Update()
@@ -35,54 +38,74 @@ public class TowerPlacement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SetTowerType(1);
+            SetTowerType(1,0);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            SetTowerType(2);
+            SetTowerType(2,1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            SetTowerType(3);
+            SetTowerType(3,2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            SetTowerType(4);
+            SetTowerType(4,3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            SetTowerType(0);
+            SetTowerType(0,4);
         }
     }
-    public void SetTowerType(int index)
+    public void SetTowerType(int index, int highlight)
     {
-        if(index == 1)
+        if (highlight != currentHighlight)
+        {
+            highlights[currentHighlight].SetActive(false);
+            Debug.Log("remove" + currentHighlight.ToString());
+        }
+
+        if (index == 1)
         {
             selectedTower = TowerType.Archer;
             selectedTowerCost = costs[0];
+            highlights[0].SetActive(true);
+            
         }
         else if (index == 2)
         {
             selectedTower = TowerType.Infantry;
             selectedTowerCost = costs[1];
+            highlights[1].SetActive(true);
         }
         else if (index == 3)
         {
             selectedTower = TowerType.Wizard;
             selectedTowerCost = costs[2];
+            highlights[2].SetActive(true);
         }
         else if (index == 4)
         {
             selectedTower = TowerType.CrystalMine;
             selectedTowerCost = costs[3];
+            highlights[3].SetActive(true);
         }
         else
         {
             selectedTower = TowerType.None;
             selectedTowerCost = 0;
+            highlights[4].SetActive(true);
         }
 
-        
+        if (highlight != currentHighlight){
+            if (index == 0)
+            {
+                currentHighlight = 4;
+            }
+            else {
+                currentHighlight = highlight;
+            }
+        }
     }
 
     IEnumerator TilePlace(TowerType tower)
@@ -112,11 +135,31 @@ public class TowerPlacement : MonoBehaviour
         //If .5 (-.15) if whole +.15
 
         
-
+        if (selectedTower == TowerType.None)
+        {
+            if (tilemap.GetTile(location))
+            {
+                if (existingTowers.ContainsKey(pos))
+                {
+                    Debug.Log("Tower here!");
+                    Debug.Log(existingTowers[pos].name);
+                    //Add getcomponent for upgrade component of tower
+                    //Call update on the ui
+                    upgradeUI.TogglePanel(true);
+                    upgradeUI.UpdateUpgradePanel("lesser dog","greater dog",1,2,420,69);
+                }
+                else
+                {
+                    upgradeUI.TogglePanel(false);
+                }
+                
+            }
+        }
         
 
-        if (tilemap.GetTile(location))
+        else if (tilemap.GetTile(location))
         {
+            
             if (worldMoney.money >= selectedTowerCost)
             {
                 if (existingTowers.ContainsKey(pos))
