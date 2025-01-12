@@ -677,6 +677,8 @@ MonoBehaviour:
   towerType: 3
   range: 2
   fireRate: 0.5
+  destroyTimer: 5
+  projectileSizeMultiplier: 8
   enemyTag: Enemy
   projectilePrefab: {fileID: 4007528686800251379, guid: 4e5d18e4ae87f5b4a9f882a3fe3a6fbd, type: 3}
   firePoint: {fileID: 1153663166}

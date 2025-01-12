@@ -10,6 +10,8 @@ public class TowerShooting : MonoBehaviour
     public float range = 2f;
     public float fireRate = 1f;
     private float fireCountdown = 0f;
+    public float destroyTimer = 5f;
+    public int projectileSizeMultiplier = 8;
     public string enemyTag = "Enemy";
     public GameObject projectilePrefab;
     public Transform firePoint;
@@ -64,7 +66,9 @@ public class TowerShooting : MonoBehaviour
 
         if(projectile != null)
             projectile.Seek(target);
-            projectile.towerType = towerType.ToString(); 
+            projectile.towerType = towerType.ToString();
+            projectile.destroyTimer = destroyTimer;
+            projectile.projectileSizeMultiplier = projectileSizeMultiplier;
     }
 
     void OnDrawGizmosSelected()

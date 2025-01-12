@@ -9,8 +9,7 @@ public class Projectile : MonoBehaviour
     public string towerType;
     private Transform target;
     public float speed = 70f;
-    //DestroyTimer Could be an Upgrade.
-    public float destroyTimer = 5f;
+    public float destroyTimer;
     public int projectileSizeMultiplier;
     public int damage = 1;
     private bool infan = false;
@@ -27,7 +26,6 @@ public class Projectile : MonoBehaviour
         target = _target;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(towerType == "Archer")
@@ -36,17 +34,19 @@ public class Projectile : MonoBehaviour
         }
         else if(towerType == "Infantry")
         {
+            destroyTimer = 5f;
             InfantryTower();
         }
-        if(towerType == "Wizard")
+        else if(towerType == "Wizard")
         {
+            destroyTimer = 0.5f;
             WizardTower();
         }
     }
 
     void WizardTower()
     {
-        Destroy(gameObject, 0.5f);
+        Destroy(gameObject, destroyTimer);
         if(target == null)
         {
             //Destroy(gameObject);
