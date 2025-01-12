@@ -23,7 +23,7 @@ public class EnemyWave : MonoBehaviour
     public bool waveCooldown;
     public Wave[] waves;
     public int waveCount = 0;
-
+    
 
     private void Start()
     {
@@ -47,12 +47,12 @@ public class EnemyWave : MonoBehaviour
         //If enemies left to spawn and game in spawning state
         if (!spawnToggle && totalEnemies > 0 && spawning)
         {
-            totalEnemies--;
             if (totalEnemies <= 0)
             {
                 spawning = false;                
             }
             StartCoroutine(SpawnDelay());
+            totalEnemies--;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -73,21 +73,29 @@ public class EnemyWave : MonoBehaviour
     {
         totalEnemies = 0;
 
-        for (int i = 0; i < enemyPrefabs.Length; i++)
-        {
-            enemyPrefabsIndex.Add(i);
-        }
-        
+        Debug.Log(waves[waveCount].basicEnemy);
+        Debug.Log(waves[waveCount].mediumEnemy);
+        Debug.Log(waves[waveCount].hardEnemy);
 
-        enemyCounts.Add(waves[waveCount].basicEnemy);
-        enemyCounts.Add(waves[waveCount].mediumEnemy);
-        enemyCounts.Add(waves[waveCount].hardEnemy);
+        AddEnemyCounts(waves[waveCount].basicEnemy, 0);
+        AddEnemyCounts(waves[waveCount].mediumEnemy, 1);
+        AddEnemyCounts(waves[waveCount].hardEnemy, 2);
+    }
+
+    public void AddEnemyCounts(int enemies, int prefabIndex)
+    {
+        if (enemies > 0)
+        {
+            enemyCounts.Add(enemies);
+            enemyPrefabsIndex.Add(prefabIndex);
+        }
     }
 
     public void CountTotalEnemies()
     {
         totalEnemies = waves[waveCount].basicEnemy + waves[waveCount].mediumEnemy + waves[waveCount].hardEnemy;
         worldEnemies.enemiesOnMap = totalEnemies;
+        Debug.Log(totalEnemies);
     }
         
 
@@ -102,25 +110,25 @@ public class EnemyWave : MonoBehaviour
 
     public void SpawnEnemy()
     {
-        
         int randIndex = Random.Range(0, (enemyCounts.Count));
+        Debug.Log("index:" + randIndex.ToString()+": "+enemyCounts.Count.ToString());
+     
         GameObject enemy = Instantiate(enemyPrefabs[enemyPrefabsIndex[randIndex]], initialSpawn.position, initialSpawn.rotation);
         enemyCounts[randIndex]--;
         EnemyCountCheck(randIndex);
         
 
-
-
     }
 
-    private void EnemyCountCheck(int index)
+    private bool EnemyCountCheck(int index)
     {
         if(enemyCounts[index] <= 0)
         {
             enemyCounts.RemoveAt(index);
             enemyPrefabsIndex.RemoveAt(index);
-            
+            return false;
         }
+        return true;
 
     }
 
