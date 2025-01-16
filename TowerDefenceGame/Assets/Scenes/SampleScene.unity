@@ -7214,14 +7214,20 @@ MonoBehaviour:
   spawnToggle: 0
   waveCooldown: 0
   waves:
-  - basicEnemy: 3
-    mediumEnemy: 1
-    hardEnemy: 1
-  - basicEnemy: 10
+  - basicEnemy: 5
+    mediumEnemy: 0
+    hardEnemy: 0
+  - basicEnemy: 5
     mediumEnemy: 5
-    hardEnemy: 1
+    hardEnemy: 5
+  - basicEnemy: 5
+    mediumEnemy: 5
+    hardEnemy: 0
   - basicEnemy: 20
     mediumEnemy: 10
+    hardEnemy: 0
+  - basicEnemy: 5
+    mediumEnemy: 5
     hardEnemy: 5
   waveCount: 0
 --- !u!114 &1818963897
